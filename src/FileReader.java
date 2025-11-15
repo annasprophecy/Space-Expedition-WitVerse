@@ -36,6 +36,9 @@ public class FileReader {
             System.out.println("Error reading file: " + e.getMessage());
         }
     }
+    public static List<Planets> getPlanetsList() {
+        return planetsList;
+    }
 
     public static void readTriviaQuestions() {
 
@@ -59,6 +62,9 @@ public class FileReader {
             System.out.println("Error reading file: " + e.getMessage());
         }
 
+    }
+    public static List<TriviaQuestion> getTriviaList() {
+        return triviaQuestion;
     }
 
 }

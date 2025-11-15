@@ -12,6 +12,13 @@ public class Planets {
         this.taskType = taskType;
         this.stardustReward = stardustReward;
     }
+    public Planets() {
+        this.name = "";
+        this.description = "";
+        this.travelCost = 0;
+        this.taskType = "";
+        this.stardustReward = 0;
+    }
 
     public String getName() {
         return name;
