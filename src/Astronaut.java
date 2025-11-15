@@ -2,10 +2,13 @@ public class Astronaut {
 
     private String name;
     private int reward;
+    private String location;
 
-    public Astronaut(String name, int reward) {
+    // create an identifier for name, reward, and location
+    public Astronaut(String name, int reward, String location) {
         super();
         this.name = name;
+        this.location = location;
         this.reward = reward;
 
     }
@@ -13,6 +16,7 @@ public class Astronaut {
     public Astronaut() {
         super();
         this.name = "unknown";
+        this.location = "unknown";
         this.reward = 0;
 
     }
@@ -21,6 +25,7 @@ public class Astronaut {
         super();
         this.name = name;
         this.reward = 0;
+        this.location = "unknown";
 
     }
 
@@ -28,6 +33,15 @@ public class Astronaut {
         super();
         this.name = "unknown";
         this.reward = reward;
+        this.location = location;
+
+    }
+
+    public Astronaut(String location) {
+        super();
+        this.location = "unknown";
+        this.reward = reward;
+        this.name = name;
 
     }
 
