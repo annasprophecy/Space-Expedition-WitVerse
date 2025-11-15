@@ -7,6 +7,7 @@ public class App {
     public static void main(String[] args) throws Exception {
         FileReader.readPlanets();
         Astronaut astronaut = new Astronaut();
+        ArrayList<TriviaQuestion> triviaQuestions = new ArrayList<TriviaQuestion>();
         int i = 1;
         ArrayList<Planets> planetsList = new ArrayList<Planets>();
         System.out.println("=====================================");
@@ -53,9 +54,14 @@ public class App {
 
             System.out.println("You can now proceed to your first mission!"
             + " \nyour first mission is "+ planetsList.get(1).getTaskType() + " to earn " + planetsList.get(1).getStardustReward() + " stardust. Good luck!");
+            triviaQuestions.get(0).getQuestion();
 
-            System.out.println("What has keys but can't open locks?");
             String answer = answeString();
+
+            if(answer.equalsIgnoreCase(triviaQuestions.get(0).getAnswer()))
+            {
+
+            }
             correctanswer(astronaut, planetsList, i);
 
             currentPlanet(planetsList, i);
@@ -102,6 +108,11 @@ public class App {
             System.out.println("You have arrived at " + planetsList.get(i).getName() +
             "Your next mission is to solve "+ planetsList.get(i+1).getTaskType() + " to earn " + planetsList.get(i+1).getStardustReward() + " stardust. Good luck!\n");
             i++;
+
+        }
+        public static void triviaQuestion(ArrayList<TriviaQuestion> triviaQuestions, int i) 
+        {
+            
 
         }
 

@@ -10,7 +10,12 @@ public class TriviaQuestion {
         this.question = question;
         this.answer = answer;
     }
-
+    public TriviaQuestion() {
+        this.type = "";
+        this.question = "";
+        this.answer = "";
+    }
+    
     public String getType() {
         return type;
 

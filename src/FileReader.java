@@ -52,6 +52,41 @@ public class FileReader {
                 String[] parts = line.split(",");
 
                 String type = parts[0].trim();
+                if (type.equalsIgnoreCase("riddle"))
+                {
+                    ArrayList<String> riddles = new ArrayList<>();
+                    for (int j = 1; j < riddles.size(); j++) {
+                        riddles.add(type);
+                    }
+                }
+                else if (type.equalsIgnoreCase("puzzle"))
+                {
+                    ArrayList<String> puzzles = new ArrayList<>();
+                    for (int j = 1; j < puzzles.size(); j++) {
+                        puzzles.add(type);
+                    }
+
+                }
+                else if (type.equalsIgnoreCase("math"))
+                {
+                    ArrayList<String> math = new ArrayList<>();
+                    for (int j = 1; j < math.size(); j++) {
+                        math.add(type);
+                    }
+                }
+                else if (type.equalsIgnoreCase("logic"))
+                {
+                    ArrayList<String> logic = new ArrayList<>();
+                    for (int j = 1; j < logic.size(); j++) {
+                        logic.add(type);
+                    }
+                }
+                else{
+                    ArrayList<String> pattern = new ArrayList<>();
+                    for (int j = 1; j < pattern.size(); j++) {
+                        pattern.add(type);
+                    }
+                }
                 String question = parts[1].trim();
                 String answer = parts[2].trim();
                 TriviaQuestion trivia = new TriviaQuestion(type, question, answer);
