@@ -25,7 +25,7 @@ public class Astronaut {
         super();
         this.name = name;
         this.reward = 0;
-        this.location = "unknown";
+        this.location = location;
 
     }
 
