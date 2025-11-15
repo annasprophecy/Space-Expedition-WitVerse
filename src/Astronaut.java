@@ -10,6 +10,10 @@ public class Astronaut {
         this.reward = reward;
 
     }
+    public Astronaut() {
+        this.name = "";
+        this.reward = 0;
+    }
 
     public String getName() {
         return name;
