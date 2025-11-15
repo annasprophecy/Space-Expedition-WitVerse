@@ -1,13 +1,58 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.List;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.lang.reflect.Array;
+import java.util.Random;
 
 public class App {
+       static ArrayList<TriviaQuestion> riddles = new ArrayList<>();
+        static ArrayList<TriviaQuestion> maths = new ArrayList<>(); 
+        static ArrayList<TriviaQuestion> logics = new ArrayList<>();
+        static ArrayList<TriviaQuestion> patterns = new ArrayList<>();
+        static ArrayList<TriviaQuestion> puzzles = new ArrayList<>();
+        static ArrayList<TriviaQuestion> trivias = new ArrayList<>();
     public static void main(String[] args) throws Exception {
+        Random random = new Random();
         FileReader.readPlanets();
+        FileReader.readTriviaQuestions();
         Astronaut astronaut = new Astronaut();
         ArrayList<TriviaQuestion> triviaQuestions = new ArrayList<TriviaQuestion>();
+        
+        triviaQuestions = (ArrayList<TriviaQuestion>) FileReader.getTriviaList();
+        for(int i =0; i < triviaQuestions.size(); i++)
+        {
+            if(triviaQuestions.get(i).getType().equalsIgnoreCase("riddle"))
+            {
+                riddles.add(triviaQuestions.get(i));
+            
+            }
+            else if(triviaQuestions.get(i).getType().equalsIgnoreCase("math"))
+            {
+                maths.add(triviaQuestions.get(i));
+            }
+            else if(triviaQuestions.get(i).getType().equalsIgnoreCase("logic"))
+            {
+                logics.add(triviaQuestions.get(i));
+            }
+            else if(triviaQuestions.get(i).getType().equalsIgnoreCase("pattern"))
+            {
+                patterns.add(triviaQuestions.get(i));
+            }
+            else if(triviaQuestions.get(i).getType().equalsIgnoreCase("puzzle"))
+            {
+                puzzles.add(triviaQuestions.get(i));
+            }
+            else 
+            {
+                trivias.add(triviaQuestions.get(i));
+            }
+        }
+        
+
+
+
         int i = 1;
         ArrayList<Planets> planetsList = new ArrayList<Planets>();
         System.out.println("=====================================");
@@ -53,24 +98,21 @@ public class App {
             System.out.println("\n");
 
             System.out.println("You can now proceed to your first mission!"
-            + " \nyour first mission is "+ planetsList.get(1).getTaskType() + " to earn " + planetsList.get(1).getStardustReward() + " stardust. Good luck!");
-            triviaQuestions.get(0).getQuestion();
+            + " \nyour first mission is "+ planetsList.get(0).getTaskType() + " to earn " + planetsList.get(0).getStardustReward() + " stardust. Good luck!");
+            System.out.println("\n");
 
-            String answer = answeString();
-
-            if(answer.equalsIgnoreCase(triviaQuestions.get(0).getAnswer()))
+            for(i =1; i < planetsList.size() -1; i++)
             {
+                System.out.println("=====================================");
+                randomQuestion(planetsList, astronaut, i, random);
+                System.out.println("Hit cancel to stop or any other key to continue");
+                String continueCommand = scanner.nextLine();
+                if(continueCommand.equalsIgnoreCase("cancel")) {
+                    break;
+                }
+                currentPlanet(planetsList, i);
 
             }
-            correctanswer(astronaut, planetsList, i);
-
-            currentPlanet(planetsList, i);
-
-            System.out.println("What comes once in a minute, twice in a moment, but never in a thousand years?");
-            answer = answeString();
-            correctanswer(astronaut, planetsList, i);
-
-            currentPlanet(planetsList, i);
             
 
             System.out.println("Thank you for playing Space Expedition WitVerse. Safe travels, Astronaut " + astronaut.getName() + "!");
@@ -79,14 +121,10 @@ public class App {
         scanner.close();
        
         }
-        public static String answeString () {
+        public static String answerString () {
             Scanner scanner = new Scanner(System.in);
             String answer = "";
             answer = scanner.nextLine();
-            while(!answer.equalsIgnoreCase("m")) {
-                System.out.println("Incorrect! Try again.");
-                answer = scanner.nextLine();
-            }
             return answer;
         }
 
@@ -110,12 +148,152 @@ public class App {
             i++;
 
         }
-        public static void triviaQuestion(ArrayList<TriviaQuestion> triviaQuestions, int i) 
+        public static List<String> typeQuestion (ArrayList<TriviaQuestion> triviaQuestions,int i) {
+        // Get the type of the question at index i
+        String type = triviaQuestions.get(i).getType();
+        ArrayList<String> filteredQuestions = new ArrayList<>();
+        for (TriviaQuestion q : triviaQuestions) {
+            if (q.getType().equalsIgnoreCase(type)) {
+                filteredQuestions.add(q.getQuestion());
+            }
+        }
+        return filteredQuestions;
+    }
+    public static void randomQuestion(ArrayList<Planets> planetsList, Astronaut astronaut, int i, Random random)
+    {
+        
+        
+        if(planetsList.get(i).getTaskType().equalsIgnoreCase("riddle"))
+        {   
+            System.out.println("\n");
+                int randomIndex = random.nextInt(riddles.size());
+                riddles.get(randomIndex);
+                System.out.println(riddles.get(randomIndex).getQuestion());
+                
+                String answer = answerString();
+                if(answer.equalsIgnoreCase(riddles.get(randomIndex).getAnswer()))
+                {
+                    correctanswer(astronaut, planetsList, i);
+                }
+                else {
+                    while(!answer.equalsIgnoreCase(riddles.get(randomIndex).getAnswer())) {
+                        System.out.println("Incorrect! Try again.");
+                        answer = answerString();
+                    }
+                    
+                }
+                System.out.println("\n");
+        }
+        else if(planetsList.get(i).getTaskType().equalsIgnoreCase("math"))
         {
+            System.out.println("\n");
             
-
+            int randomIndex = random.nextInt( maths.size());
+            System.out.println(maths.get(randomIndex));
+                System.out.println(maths.get(randomIndex).getQuestion());
+                
+                String answer = answerString();
+                if(answer.equalsIgnoreCase(maths.get(randomIndex).getAnswer()))
+                {
+                    correctanswer(astronaut, planetsList, i);
+                }
+                else {
+                    while(!answer.equalsIgnoreCase(maths.get(randomIndex).getAnswer())) {
+                        System.out.println("Incorrect! Try again.");
+                        answer = answerString();
+                    }
+                    
+                }
+                System.out.println("\n");
+        }
+        else if(planetsList.get(i).getTaskType().equalsIgnoreCase("logic"))
+        {
+            System.out.println("\n");
+            int randomIndex = random.nextInt(  logics.size());
+                System.out.println(logics.get(randomIndex).getQuestion());
+                
+                System.out.println("\n");
+                String answer = answerString();
+                System.out.println("\n");
+                if(answer.equalsIgnoreCase(logics.get(randomIndex).getAnswer()))
+                {
+                    System.out.println("\n");
+                    correctanswer(astronaut, planetsList, i);
+                }
+                else {
+                    while(!answer.equalsIgnoreCase(logics.get(randomIndex).getAnswer())) {
+                        System.out.println("Incorrect! Try again.");
+                        answer = answerString();
+                    }
+                    
+                }
+                System.out.println("\n");
+        }
+        else if(planetsList.get(i).getTaskType().equalsIgnoreCase("pattern"))
+        {
+            System.out.println("\n");
+            int randomIndex = random.nextInt(  patterns.size());
+                System.out.println(patterns.get(randomIndex).getQuestion());
+                
+                String answer = answerString();
+                if(answer.equalsIgnoreCase(patterns.get(randomIndex).getAnswer()))
+                {
+                    correctanswer(astronaut, planetsList, i);
+                }
+                else {
+                    while(!answer.equalsIgnoreCase(patterns.get(randomIndex).getAnswer())) {
+                        System.out.println("Incorrect! Try again.");
+                        answer = answerString();
+                    }
+                    
+                }
+                System.out.println("\n");
+        }
+        else if(planetsList.get(i).getTaskType().equalsIgnoreCase("puzzle"))
+        {
+            System.out.println("\n");
+            int randomIndex = random.nextInt(  puzzles.size());
+                System.out.println(puzzles.get(randomIndex).getQuestion());
+                
+                String answer = answerString();
+                if(answer.equalsIgnoreCase(puzzles.get(randomIndex).getAnswer()))
+                {
+                    correctanswer(astronaut, planetsList, i);
+                }
+                else {
+                    while(!answer.equalsIgnoreCase(puzzles.get(randomIndex).getAnswer())) {
+                        System.out.println("Incorrect! Try again.");
+                        answer = answerString();
+                    }
+                    
+                }
+                System.out.println("\n");
+        }
+        else 
+        {
+            System.out.println("\n");
+            int randomIndex = random.nextInt(  trivias.size());
+                System.out.println(trivias.get(randomIndex).getQuestion());
+               
+                String answer = answerString();
+                if(answer.equalsIgnoreCase(trivias.get(randomIndex).getAnswer()))
+                {
+                    correctanswer(astronaut, planetsList, i);
+                }
+                else {
+                    while(!answer.equalsIgnoreCase(puzzles.get(randomIndex).getAnswer())) {
+                        System.out.println("Incorrect! Try again.");
+                        answer = answerString();
+                    }
+                    
+                }
+                System.out.println("\n");
         }
 
+
     }
+    
+    
+}
 
             
